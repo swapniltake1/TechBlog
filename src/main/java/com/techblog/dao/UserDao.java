@@ -10,6 +10,33 @@ public class UserDao {
 		this.con = con;
 	}
 	
+	// Update Information
+	
+	public boolean updateUser(User user) {
+		boolean f=false;
+		 try {
+			 
+			 String query="update user set name=?, email=?, password=?, gender=?, about=?, profile=? where id=?";
+			 
+			 PreparedStatement psmt=con.prepareStatement(query);
+			 psmt.setString(1, user.getName());
+			 psmt.setString(2, user.getEmail());
+			 psmt.setString(3, user.getPassword());
+			 psmt.setString(4, user.getGender());
+			 psmt.setString(5, user.getAbout());
+			 psmt.setString(6, user.getProfile());
+			 psmt.setInt(7, user.getId());
+			 
+			 psmt.executeUpdate();
+			 f=true;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return f;
+	 }
+	
     // To save user into database from signup page 
 	public boolean saveUser(User user) {
 		boolean f=false; 
@@ -64,12 +91,15 @@ public class UserDao {
 				user.setProfile(set.getString("profile"));
 			}
 			
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		
-		
 		return user;
 	}
+	
+	
+	
 }
