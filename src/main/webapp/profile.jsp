@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="com.techblog.entities.User" errorPage="errorpage.jsp"%>
+ <%@page import="com.techblog.entities.message" %>
 
 <%
 User user = (User) session.getAttribute("currentuser");
@@ -80,6 +81,24 @@ if (user == null) {
 	</nav>
 
 	<!-- End Of NavBAr -->
+	
+	<!-- Msg for updation -->
+	
+	 <%
+               message msg=(message) session.getAttribute("msg");
+                if(msg!=null){
+                %>
+                
+             <!--    // Write a code for get class of css  -->
+                <div class="<%=msg.getCssClass() %> text-center" role="alert">
+                <%= msg.getContent() %>
+                </div> 
+                <%
+                session.removeAttribute("msg");
+                }
+                 %>
+	
+	<!-- End of MSG -->
 
 	<!-- Start of profile modal -->
 

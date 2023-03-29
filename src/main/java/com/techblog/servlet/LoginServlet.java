@@ -1,7 +1,7 @@
 package com.techblog.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+//import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,13 +46,13 @@ public class LoginServlet extends HttpServlet {
 		doGet(request, response);
 		
 		response.setContentType("text/html");
-		PrintWriter out=response.getWriter();
+	//	PrintWriter out=response.getWriter();
 		
 		// Fetch data from form
 		String userEmail=request.getParameter("email");
 		String userPassword=request.getParameter("password");
 		
-		//creating userdao object. and passing database connection
+		//creating userDao object. and passing database connection
 		UserDao dao=new UserDao(ConnectionProvider.getConnection());
 		
 		User u=dao.getUserByEmailAndPassword(userEmail, userPassword);

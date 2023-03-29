@@ -1,5 +1,7 @@
 package com.techblog.servlet;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -15,7 +17,9 @@ import javax.servlet.http.Part;
 
 import com.techblog.dao.UserDao;
 import com.techblog.entities.User;
+import com.techblog.entities.message;
 import com.techblog.helper.ConnectionProvider;
+import com.techblog.helper.Helper;
 
 /**
  * Servlet implementation class EditServlet
@@ -77,10 +81,37 @@ public class EditServlet extends HttpServlet {
 		
 		boolean ans=userDao.updateUser(user);
 		if(ans) {
-			out.println("Updated Successfully");
+			// out.println("Updated Successfully");
+			@SuppressWarnings("deprecation")
+			String path=request.getRealPath("/")+"profile"+File.separator+user.getProfile();
+			
+			   // Delete 1st photo 
+				Helper.deleteFile(path);
+				
+				
+					// Save new Photo 
+					if (Helper.saveFile(part.getInputStream(), path)) 
+					{
+						out.println("Profile Updated Successfully");
+						
+						message msg=new message("Profile Updated Successfully", "Success", "alert-success");
+						// Sending our msg through session
+						HttpSession s = request.getSession();
+						s.setAttribute("msg", msg);
+					}
+				
+			
+			
 		}else {
-			out.println("Error while updating");
+			out.println("Error while updating Profile Information");
+			
+			message msg=new message("Profile Not Updated", "error", "alert-denger");
+			// Sending our msg through session
+			HttpSession s = request.getSession();
+			s.setAttribute("msg", msg);
 		}
+		
+		response.sendRedirect("profile.jsp");
 		
 	}
 
