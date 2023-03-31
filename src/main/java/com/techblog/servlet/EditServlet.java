@@ -1,11 +1,8 @@
 package com.techblog.servlet;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -72,6 +69,8 @@ public class EditServlet extends HttpServlet {
 		user.setEmail(email);
 		user.setPassword(password);
 		user.setAbout(about);
+		
+		String oldfile=user.getProfile();
 		user.setProfile(imageName);
 		
 		// Update Into Database
@@ -85,9 +84,16 @@ public class EditServlet extends HttpServlet {
 			@SuppressWarnings("deprecation")
 			String path=request.getRealPath("/")+"profile"+File.separator+user.getProfile();
 			
-			   // Delete 1st photo 
-				Helper.deleteFile(path);
-				
+			// path old file 
+			@SuppressWarnings("deprecation")
+			String pathold=request.getRealPath("/")+"profile"+File.separator+oldfile;
+			
+			// to prevent default profile photo (run only when condition is false this condition )
+			if (!oldfile.equals("default.jpg")) {
+			
+			// Delete 1st photo 
+				Helper.deleteFile(pathold);
+			}
 				
 					// Save new Photo 
 					if (Helper.saveFile(part.getInputStream(), path)) 
