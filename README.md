@@ -1,4 +1,4 @@
-#TechBlog
+# TechBlog
 TechBlog is a demo technical blog built using Java technologies such as JSP, Servlets, and SQL database. The project implements a basic CRUD (Create, Read, Update, Delete) functionality for blog posts and user management.
 
 # Technologies used
