@@ -3,12 +3,14 @@
 </h2>
 
 # Technologies used
-Java
-JSP (JavaServer Pages)
-Servlets
-SQL
-jQuery
-JavaScript
+<br>
+Java <br>
+JSP (JavaServer Pages) <br>
+Servlets <br>
+SQL <br>
+jQuery <br>
+JavaScript <br>
+
 
 #Features
 User authentication and authorization
