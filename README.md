@@ -9,6 +9,8 @@ Servlets <br>
 SQL <br>
 jQuery <br>
 JavaScript <br>
+Bootstrap 4 <br>
+other alerts scripts <br>
 
 
 # Features
