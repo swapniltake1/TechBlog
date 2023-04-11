@@ -60,13 +60,13 @@ public class AddPostServlet extends HttpServlet {
 		String imageName=part.getSubmittedFileName();
 		
 		// Printing data which we feetching
-		
+	/*	
 		out.println(cid);
 		out.println(ptitle);
 		out.println(pcontent);
 		out.println(pcode);
 		out.println(imageName);
-		
+	*/	
 		
 		
 		// Getting current user id.
@@ -77,7 +77,7 @@ public class AddPostServlet extends HttpServlet {
 	    
 	//	out.println(user.getName());
 		
-		Post post=new Post(ptitle,pcontent,pcode,imageName, null,cid,user.getId());
+		Post post=new Post(ptitle,pcontent,pcode,imageName, null,user.getId(),cid);
 		
 		PostDao dao=new PostDao(ConnectionProvider.getConnection());
 		
@@ -87,6 +87,9 @@ public class AddPostServlet extends HttpServlet {
 			String path = request.getRealPath("/") + "blog_post" + File.separator + part.getSubmittedFileName();
              Helper.saveFile(part.getInputStream(), path);
 			out.println("done");
+			
+		    response.sendRedirect("profile.jsp");
+			
 		}else {
 			out.println("error");
 		}
